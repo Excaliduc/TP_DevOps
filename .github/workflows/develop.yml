@@ -2,8 +2,7 @@ name: CI devops test backend
 on:
   #to begin you want to launch this job in main and develop
   push:
-    branches: [develop, main]
-  pull_request:
+    branches: "**"
 
 jobs:
   test-backend: 
