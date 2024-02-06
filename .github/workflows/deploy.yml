@@ -1,11 +1,15 @@
-
-  # define job to build and publish docker image
-  
+name: CI devops build and push Docker image
+on:
+  workflow_run:
+    workflows: ["CI devops test backend"]
+    branches: [main]
+    types:
+      - completed
+jobs:
   build-and-push-docker-image:
-    needs: test-backend
     # run only when code is compiling and tests are passing
     runs-on: ubuntu-22.04
-
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
   # steps to perform in job
     steps:
       - name: Checkout code

@@ -1,0 +1,25 @@
+name: CI devops test backend
+on:
+  #to begin you want to launch this job in main and develop
+  push:
+    branches: [develop, main]
+  pull_request:
+
+jobs:
+  test-backend: 
+    runs-on: ubuntu-22.04
+    steps:
+     #checkout your github code using actions/checkout@v2.5.0
+      - uses: actions/checkout@v4.1.1
+
+     #do the same with another action (actions/setup-java@v3) that enable to setup jdk 17
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          architecture: x64
+
+     #finally build your app with the latest command
+      - name: Build and test with Maven
+        run: mvn -B verify sonar:sonar -Dsonar.projectKey=Excaliduc_TP_DevOps -Dsonar.organization=excaliduc -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}  --file ./simple-api-student-main/pom.xml
