@@ -2,8 +2,8 @@
 FROM maven:3.8.6-amazoncorretto-17 AS myapp-build
 ENV MYAPP_HOME /opt/myapp
 WORKDIR $MYAPP_HOME
-COPY simple-api-student/pom.xml .
-COPY simple-api-student/src ./src
+COPY ./pom.xml .
+COPY ./src ./src
 RUN mvn package -DskipTests
 
 # Run
