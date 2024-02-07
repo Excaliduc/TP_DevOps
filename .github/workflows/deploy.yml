@@ -51,8 +51,7 @@ jobs:
       - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v2
         with:
-          context: ./ansible
-          playbook: playbook.yml
+          playbook: ./ansible/playbook.yml
           key: ${{secrets.ID_RSA_TP_ANSIBLE}}
           options: |
             --inventory inventories/setup.yml
