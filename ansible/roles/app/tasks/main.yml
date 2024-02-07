@@ -8,7 +8,7 @@
     - name: Run Docker container
       docker_container:
         name: backend
-        image: "{{docker_hub_username}}"/api:latest
+        image: "{{docker_hub_username}}/api:latest"
         state: started
         restart_policy: always
         env:

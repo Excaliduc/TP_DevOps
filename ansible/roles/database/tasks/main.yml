@@ -2,13 +2,13 @@
   block:
     - name: Pull docker image
       docker_image:
-        name: docker_hub_username/sql:latest
+        name: "{{docker_hub_username}}/sql:latest"
         source: pull
 
     - name: Run Docker container
       docker_container:
         name: database
-        image: docker_hub_username/sql:latest
+        image: "{{docker_hub_username}}/sql:latest"
         state: started
         restart_policy: always
         env:
