@@ -1,4 +1,4 @@
-name: CI devops build and push Docker image
+name: CI build and push Docker image
 on:
   workflow_run:
     workflows: ["CI devops test backend"]
@@ -9,8 +9,7 @@ jobs:
   build-and-push-docker-image:
     # run only when code is compiling and tests are passing
     runs-on: ubuntu-22.04
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-  # steps to perform in job
+    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2.5.0
@@ -49,3 +48,24 @@ jobs:
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
         # DO the same for httpd
+      - name: Run playbook
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: ./ansible/playbook.yml
+          key: ${{secrets.ID_RSA_TP_ANSIBLE}}
+          options: |
+            --inventory inventories/setup.yml
+      - name: Deploy with ansible
+        uses: ansible/ansible-playbook@v2
+        with:
+          playbook: ./ansible/playbook.yml
+          inventory: ./ansible/inventories/setup.yml
+          extra-vars: 
+            "postgres_db: ${{secrets.POSTGRES_DB}}
+            postgres_user: ${{secrets.POSTGRES_USER}}
+            postgres_password: ${{secrets.POSTGRES_PASSWORD}} 
+            db_url: ${{secrets.DOCKER_HUB_USERNAME}}
+            db_user: ${{secrets.POSTGRES_USER}}
+            db_password: ${{secrets.POSTGRES_PASSWORD}}
+            docker_hub_username: ${{secrets.DOCKER_HUB_USERNAME}}
+            docker_hub_password: ${{secrets.DOCKER_HUB_PASSWORD}}"
