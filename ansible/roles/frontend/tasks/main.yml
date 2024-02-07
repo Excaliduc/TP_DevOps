@@ -7,7 +7,7 @@
 
     - name: Run Docker container
       docker_container:
-        name: http
+        name: front
         image: "{{docker_hub_username}}/front:latest"
         state: started
         restart_policy: always
