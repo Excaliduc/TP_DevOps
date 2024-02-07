@@ -48,6 +48,17 @@ jobs:
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
         # DO the same for httpd
+
+      - name: Build image and push frontend
+        uses: docker/build-push-action@v3
+        with:
+          # relative path to the place where source code with Dockerfile is located
+          context: ./devops-front-main
+          # Note: tags has to be all lower-case
+          tags:  ${{secrets.DOCKER_HUB_USERNAME}}/front:latest
+          # build on feature branches, push only on main branch
+          push: ${{ github.ref == 'refs/heads/main' }}
+
       - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v2
         with:
