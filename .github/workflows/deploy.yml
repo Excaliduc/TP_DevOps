@@ -51,15 +51,17 @@ jobs:
       - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v2
         with:
-          playbook: ./ansible/playbook.yml
+          context: ./ansible
+          playbook: playbook.yml
           key: ${{secrets.ID_RSA_TP_ANSIBLE}}
           options: |
             --inventory inventories/setup.yml
       - name: Deploy with ansible
         uses: ansible/ansible-playbook@v2
         with:
-          playbook: ./ansible/playbook.yml
-          inventory: ./ansible/inventories/setup.yml
+          context: ./ansible
+          playbook: playbook.yml
+          inventory: inventories/setup.yml
           extra-vars: 
             "postgres_db: ${{secrets.POSTGRES_DB}}
             postgres_user: ${{secrets.POSTGRES_USER}}
