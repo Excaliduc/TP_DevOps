@@ -56,12 +56,6 @@ jobs:
           key: ${{secrets.ID_RSA_TP_ANSIBLE}}
           options: |
             --inventory inventories/setup.yml
-      - name: Deploy with ansible
-        uses: ansible/ansible-playbook@v2
-        with:
-          context: ./ansible
-          playbook: playbook.yml
-          inventory: inventories/setup.yml
           extra-vars: 
             "postgres_db: ${{secrets.POSTGRES_DB}}
             postgres_user: ${{secrets.POSTGRES_USER}}
