@@ -1,0 +1,17 @@
+- name: Setup docker http
+  block:
+    - name: Pull docker image
+      docker_image:
+        name: docker_hub_username/http:latest
+        source: pull
+
+    - name: Run Docker container
+      docker_container:
+        name: http
+        image: docker_hub_username/http:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "80:80"
+        networks:
+          - name: app-network

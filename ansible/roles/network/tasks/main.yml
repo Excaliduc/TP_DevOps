@@ -1,0 +1,4 @@
+- name: Créer un réseau Docker (si nécessaire)
+  docker_network:
+    name: app-network
+    driver: bridge

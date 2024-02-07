@@ -1,0 +1,19 @@
+- name: Setup docker postgres
+  block:
+    - name: Pull docker image
+      docker_image:
+        name: docker_hub_username/sql:latest
+        source: pull
+
+    - name: Run Docker container
+      docker_container:
+        name: database
+        image: docker_hub_username/sql:latest
+        state: started
+        restart_policy: always
+        env:
+          POSTGRES_DB: "{{postgres_db}}"
+          POSTGRES_USER: "{{postgres_user}}"
+          POSTGRES_PASSWORD: "{{postgres_password}}"
+        networks:
+          - name: app-network
