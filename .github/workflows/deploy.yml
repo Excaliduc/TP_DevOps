@@ -2,7 +2,7 @@ name: CI build and push Docker image
 on:
   workflow_run:
     workflows: ["CI devops test backend"]
-    branches: [develop]
+    branches: [main]
     types:
       - completed
 jobs:
@@ -10,7 +10,6 @@ jobs:
     # run only when code is compiling and tests are passing
     runs-on: ubuntu-22.04
     # if: ${{ github.event.workflow_run.conclusion == 'success' }}
-  # steps to perform in job
     steps:
       - name: Checkout code
         uses: actions/checkout@v2.5.0
