@@ -67,12 +67,5 @@ jobs:
           key: ${{secrets.ID_RSA_TP_ANSIBLE}}
           options: |
             --inventory inventories/setup.yml
-          extra-vars: 
-            postgres_db: ${{secrets.POSTGRES_DB}}
-            postgres_user: ${{secrets.POSTGRES_USER}}
-            postgres_password: ${{secrets.POSTGRES_PASSWORD}} 
-            db_url: ${{secrets.DB_URL}}
-            db_user: ${{secrets.POSTGRES_USER}}
-            db_password: ${{secrets.POSTGRES_PASSWORD}}
-            docker_hub_username: ${{secrets.DOCKER_HUB_USERNAME}}
-            docker_hub_password: ${{secrets.DOCKER_HUB_PASSWORD}}
+          env:
+            SECRET_VARIABLE: ${{ secrets.ANSIBLE_VAULT }}
