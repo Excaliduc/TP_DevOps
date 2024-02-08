@@ -1,11 +1,15 @@
 - name: install docker
-  block:
-    vars:
-     ansible_python_interpreter: /usr/bin/python3
+  hosts: all
+  gather_facts: false
+  become: true
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+  tasks:
     - name: Docker Hub Login
       docker_login:
-        username: "{{docker_hub_username}}"
-        password: "{{docker_hub_password}}"
+        username: "{{ docker_hub_username }}"
+        password: "{{ docker_hub_password }}"
 
     - name: Install device-mapper-persistent-data
       yum:
@@ -39,6 +43,8 @@
         ansible_python_interpreter: /usr/bin/python3
 
     - name: Make sure Docker is running
-      service: name=docker state=started
+      service:
+        name: docker
+        state: started
       tags: docker
 
