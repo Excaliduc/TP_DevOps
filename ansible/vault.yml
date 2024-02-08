@@ -1,0 +1,8 @@
+postgres_db: db
+postgres_user: usr
+postgres_password: pwd
+db_url: jdbc:postgresql://database:5432/db
+db_user: usr
+db_password: pwd
+docker_hub_username: excaliduc
+docker_hub_password: dckr_pat_YqvNT7Ej7aQk6uVbkeQX-B1_4BM

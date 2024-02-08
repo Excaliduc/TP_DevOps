@@ -2,7 +2,7 @@
   block:
     - name: Pull docker image
       docker_image:
-        name: docker_hub_username/api:latest
+        name: "{{docker_hub_username}}/api:latest"
         source: pull
 
     - name: Run Docker container
@@ -12,7 +12,7 @@
         state: started
         restart_policy: always
         env:
-          DB_URL: "{{db_url}}"
+          DB_URL: "db_url}}"
           DB_USER: "{{db_user}}"
           DB_PASSWORD: "{{db_password}}"
         networks:
