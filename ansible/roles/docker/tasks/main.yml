@@ -1,8 +1,3 @@
-- name: Docker Hub Login
-  docker_login:
-    username: "{{ docker_hub_username }}"
-    password: "{{ docker_hub_password }}"
-
 - name: Install device-mapper-persistent-data
   yum:
     name: device-mapper-persistent-data
@@ -40,3 +35,7 @@
     state: started
   tags: docker
 
+- name: Docker Hub Login
+  docker_login:
+    username: "{{ docker_hub_username }}"
+    password: "{{ docker_hub_password }}"
