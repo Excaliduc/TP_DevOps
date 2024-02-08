@@ -65,7 +65,6 @@ jobs:
           playbook: playbook.yml
           directory: ./ansible
           key: ${{secrets.ID_RSA_TP_ANSIBLE}}
-          options: |
-            --inventory inventories/setup.yml
-          env:
-            SECRET_VARIABLE: ${{ secrets.ANSIBLE_VAULT }}
+          vault_password: ${{secrets.ANSIBLE_VAULT}}
+          options: |--inventory inventories/setup.yml--extra-vars "@secret.yml"
+
