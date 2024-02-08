@@ -11,5 +11,7 @@
         image: "{{docker_hub_username}}/front:latest"
         state: started
         restart_policy: always
+        recreate: true
+        pull: true
         networks:
           - name: app-network

@@ -10,6 +10,8 @@
         name: database
         image: "{{docker_hub_username}}/sql:latest"
         state: started
+        recreate: true
+        pull: true
         restart_policy: always
         env:
           POSTGRES_DB: "{{postgres_db}}"
