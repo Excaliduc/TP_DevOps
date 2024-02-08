@@ -15,7 +15,7 @@
 - hosts: centos@antoine.ducret.takima.cloud
   become: yes
   roles:
-    # - docker
+    - docker
     - network
     - database
     - app
