@@ -39,3 +39,6 @@ docker push excaliduc/sql:1.0
 docker push excaliduc/http:1.0
 docker push excaliduc/api:1.0
 ```
+
+
+push 
