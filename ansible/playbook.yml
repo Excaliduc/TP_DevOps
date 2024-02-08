@@ -1,17 +1,6 @@
 - hosts: all
   gather_facts: false
   become: true
-  vars:
-     ansible_python_interpreter: /usr/bin/python3
-  tasks:
-    - name: Test connection
-      ping:
-    
-    - name: Docker Hub Login
-      docker_login:
-        username: "{{docker_hub_username}}"
-        password: "{{docker_hub_password}}"
-
 - hosts: centos@antoine.ducret.takima.cloud
   become: yes
   roles:

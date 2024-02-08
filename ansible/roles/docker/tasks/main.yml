@@ -1,5 +1,12 @@
 - name: install docker
   block:
+    vars:
+     ansible_python_interpreter: /usr/bin/python3
+    - name: Docker Hub Login
+      docker_login:
+        username: "{{docker_hub_username}}"
+        password: "{{docker_hub_password}}"
+
     - name: Install device-mapper-persistent-data
       yum:
         name: device-mapper-persistent-data
